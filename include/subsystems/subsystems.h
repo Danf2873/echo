@@ -322,15 +322,15 @@ inline void subsystemInit() {
     // 17 is front drive motor left
     // 18 middle drive motor left
 
-    topIntakeSubsystem = new TopIntakeSubsystem({6}, pros::Optical(21));
-    bottomIntakeSubsystem = new MotorSubsystem(pros::Motor(-12));
-    liftSubsystem = new LiftSubsystem({-15}, PID(1.2, 0.0, 3.0, 0.2, 1.0));
+    topIntakeSubsystem = new TopIntakeSubsystem(pros::Motor(-1), pros::Optical(21));
+    bottomIntakeSubsystem = new MotorSubsystem(pros::Motor(-8));
+    liftSubsystem = new LiftSubsystem({11}, PID(1.2, 0.0, 3.0, 0.2, 1.0));
     goalClampSubsystem = new SolenoidSubsystem(pros::adi::DigitalOut('e'));
     hangSubsystem = new SolenoidSubsystem({pros::adi::DigitalOut('a'), pros::adi::DigitalOut('d')});
     drivetrainSubsystem = new DrivetrainSubsystem(
-        {16, -17, -18}, {-4, 7, 10}, pros::Imu(5), pros::adi::DigitalOut('c'), pros::Rotation(-8),
+        {-15, -13, 14}, {17, 20, -18}, pros::Imu(2), pros::adi::DigitalOut('c'), pros::Rotation(3),
         []() { return goalClampSubsystem->getLastValue(); },
-        pros::Rotation(3)); // wheels listed back to front; 8 for rotation sensor on pto
+        pros::Rotation(3)); // 293Y config: left(-15,-13,14) right(17,20,-18) IMU(2)
 
     pros::Task([]() {
         if (!topIntakeSubsystem->visionConnected()) {
@@ -355,10 +355,10 @@ inline void subsystemInit() {
         }
     });
 
-    drivetrainSubsystem->addLocalizationSensor(new Distance(CONFIG::DISTANCE_LEFT_OFFSET, 0.987, pros::Distance(19)));
-    drivetrainSubsystem->addLocalizationSensor(new Distance(CONFIG::DISTANCE_FRONT_OFFSET, 0.986, pros::Distance(20)));
-    drivetrainSubsystem->addLocalizationSensor(new Distance(CONFIG::DISTANCE_RIGHT_OFFSET, 0.980, pros::Distance(2)));
-    drivetrainSubsystem->addLocalizationSensor(new Distance(CONFIG::DISTANCE_BACK_OFFSET, 0.979, pros::Distance(9)));
+    // drivetrainSubsystem->addLocalizationSensor(new Distance(CONFIG::DISTANCE_LEFT_OFFSET, 0.987, pros::Distance(19)));
+    // drivetrainSubsystem->addLocalizationSensor(new Distance(CONFIG::DISTANCE_FRONT_OFFSET, 0.986, pros::Distance(20)));
+    // drivetrainSubsystem->addLocalizationSensor(new Distance(CONFIG::DISTANCE_RIGHT_OFFSET, 0.980, pros::Distance(2)));
+    // drivetrainSubsystem->addLocalizationSensor(new Distance(CONFIG::DISTANCE_BACK_OFFSET, 0.979, pros::Distance(9)));
 
     drivetrainSubsystem->initUniform(-70_in, -70_in, 70_in, 70_in, 0_deg, false);
 
