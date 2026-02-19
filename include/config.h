@@ -16,8 +16,7 @@ namespace CONFIG {
     constexpr QLength DRIVE_RADIUS = 3.25_in / 2.0;
     //constexpr QLength ODOM_RADIUS = 2_in / 2.0;
     constexpr float DRIVE_RATIO = 48.0 / 36.0;
-    //constexpr float STRING_RATIO = 1.0;
-    // constexpr double LIFT_RATIO = 18.0 / 6.0;
+    constexpr double LIFT_RATIO = 18.0 / 6.0;
     constexpr QLength TRACK_WIDTH = 10_in;
     constexpr size_t NUM_PARTICLES = 250;
     constexpr Angle ANGLE_FINISH_THRESHOLD = 0.0_deg;
@@ -41,6 +40,12 @@ namespace CONFIG {
     const Eigen::Vector3f DISTANCE_BACK_OFFSET((-5.9_in).getValue(), (-5.2_in).getValue(), (180_deg).getValue());
 
     constexpr auto AI_VISION_PIXELS_TO_DEGREES = 0.20443037974_deg;
+
+    constexpr Angle LIFT_IDLE_POSITION = 0_deg;
+    constexpr Angle WALL_STAKE_LOAD_HEIGHT = 20_deg;
+    constexpr Angle WALL_STAKE_PRIME_HEIGHT = 95_deg;
+    constexpr Angle DESCORE_HEIGHT = 155_deg;
+    constexpr Angle ALLIANCE_STAKE_SCORE_HEIGHT = 185_deg;
 
     constexpr float RAMSETE_ZETA = 0.4;
     constexpr float RAMSETE_BETA = 45.0;
